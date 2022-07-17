@@ -33,12 +33,18 @@ def preprocess_data(dataset):
 
 
 def label_encoding(x_dataset):
-    label_encoder = preprocessing.LabelEncoder()
 
-    x_dataset['Gender'] = label_encoder.fit_transform(x_dataset['Gender'])
-    x_dataset['Customer Type'] = label_encoder.fit_transform(x_dataset['Customer Type'])
-    x_dataset['Type of Travel'] = label_encoder.fit_transform(x_dataset['Type of Travel'])
-    x_dataset['Class'] = label_encoder.fit_transform(x_dataset['Class'])
+    x_dataset['Gender'] = x_dataset['Gender'].replace(
+        {'Male': 1, 'Female': 0})
+
+    x_dataset['Customer Type'] = x_dataset['Customer Type'].replace(
+        {'Returning': 0, 'First-time': 1})
+
+    x_dataset['Type of Travel'] = x_dataset['Type of Travel'].replace(
+        {'Business': 0, 'Personal': 1})
+
+    x_dataset['Class'] = x_dataset['Class'].replace(
+        {'Business': 0, 'Economy': 1, 'Economy Plus': 2})
 
     print("\t\tX DATASET AFTER LABEL ENCODING\n\n", x_dataset, "\n\n\n")
 
